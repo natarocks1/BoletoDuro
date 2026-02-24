@@ -36,7 +36,9 @@
 <body>
 
 <h2>Ingresá el nombre de cada boleto</h2>
+
 <div id="form"></div>
+
 <button onclick="guardar()">Guardar nombres</button>
 
 <script>
@@ -73,10 +75,8 @@ function guardar() {
     "&payment_id=" + paymentId +
     "&nombres=" + nombresParam;
 
-  fetch(url)
-    .then(r => r.json())
-    .then(() => alert("Nombres guardados OK"))
-    .catch(() => alert("Error al guardar"));
+  // ✅ REDIRECCIÓN (NO CORS)
+  window.location.href = url;
 }
 </script>
 
