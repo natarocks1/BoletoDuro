@@ -12,11 +12,6 @@
       text-align: center;
       padding: 30px;
     }
-
-    h2 {
-      margin-bottom: 20px;
-    }
-
     input {
       display: block;
       margin: 10px auto;
@@ -25,7 +20,6 @@
       max-width: 400px;
       font-size: 16px;
     }
-
     button {
       margin-top: 20px;
       padding: 15px 30px;
@@ -41,54 +35,56 @@
 
 <body>
 
-  <h2>Ingresá el nombre de cada boleto</h2>
+<h2>Ingresá el nombre de cada boleto</h2>
 
-  <div id="form"></div>
+<div id="form"></div>
 
-  <button onclick="guardar()">Guardar nombres</button>
+<button onclick="guardar()">Guardar nombres</button>
 
-  <script>
-    // 🔎 Leer parámetros de la URL
-    const params = new URLSearchParams(window.location.search);
-    const qty = Number(params.get("qty"));
-    const paymentId = params.get("payment_id");
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const qty = Number(params.get("qty"));
+  const paymentId = params.get("payment_id");
 
-    if (!qty || !paymentId) {
-      document.body.innerHTML = "<h2>Error: faltan datos del pago</h2>";
-      throw new Error("Faltan parámetros");
+  if (!qty || !paymentId) {
+    document.body.innerHTML = "<h2>Error: faltan datos del pago</h2>";
+    throw new Error("Faltan parámetros");
+  }
+
+  const form = document.getElementById("form");
+
+  for (let i = 1; i <= qty; i++) {
+    const input = document.createElement("input");
+    input.placeholder = "Nombre del boleto " + i;
+    form.appendChild(input);
+  }
+
+  function guardar() {
+    const nombres = Array.from(document.querySelectorAll("input"))
+      .map(i => i.value.trim());
+
+    if (nombres.some(n => n === "")) {
+      alert("Completá todos los nombres");
+      return;
     }
 
-    const form = document.getElementById("form");
-
-    // ✍️ Crear inputs según cantidad de boletos
-    for (let i = 1; i <= qty; i++) {
-      const input = document.createElement("input");
-      input.placeholder = "Nombre del boleto " + i;
-      form.appendChild(input);
-    }
-
-    function guardar() {
-      const inputs = document.querySelectorAll("input");
-      const nombres = Array.from(inputs).map(i => i.value.trim());
-
-      if (nombres.some(n => n === "")) {
-        alert("Por favor completá todos los nombres");
-        return;
-      }
-
-      // 🚨 CAMBIÁ ESTA URL POR LA DE TU WEB APP (App Boletos.gs)
-      fetch("https://script.google.com/macros/s/AKfycbyU0xHUOpvRGLzp8O32k2Ka-buzdp4qeptGMy-tSHO_f2O80QKb4Pu73mUbJDA4ddgU/exec?payment_id=" + paymentId, {
+    fetch(
+      "https://script.google.com/macros/s/AKfycbw1Ue8JaCs6T9nE0i4EEy8BUpDdsrSXXzG8xdADlQaGH0W-ORMD1tZTvyyBoAhpA2KL/exec?payment_id=" + paymentId,
+      {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(nombres)
-      })
-      .then(() => {
-        alert("Nombres guardados correctamente. ¡Nos vemos en el show!");
-      })
-      .catch(() => {
-        alert("Error al guardar los nombres");
-      });
-    }
-  </script>
+      }
+    )
+    .then(r => r.json())
+    .then(() => {
+      alert("Nombres guardados correctamente");
+    })
+    .catch(() => {
+      alert("Error al guardar los nombres");
+    });
+  }
+</script>
 
 </body>
 </html>
