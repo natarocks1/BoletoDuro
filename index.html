@@ -16,24 +16,19 @@
     .box {
       margin-top: 30px;
     }
-    select {
-      padding: 10px;
+    select, button {
+      padding: 12px;
       font-size: 16px;
+      margin-top: 10px;
     }
     button {
-      display: inline-block;
-      padding: 15px 30px;
-      margin-top: 20px;
       background: red;
       color: white;
       border: none;
       border-radius: 5px;
-      font-size: 18px;
       cursor: pointer;
     }
-    button:hover {
-      opacity: 0.9;
-    }
+    button:hover { opacity: 0.9; }
   </style>
 </head>
 
@@ -47,8 +42,13 @@
   <div class="box">
     <h2>Compra tus boletos</h2>
 
-    <p>Selecciona la cantidad:</p>
+    <p>Tipo de boleto</p>
+    <select id="tipo">
+      <option value="General">General</option>
+      <option value="Meet & Greet">Meet & Greet</option>
+    </select>
 
+    <p>Cantidad</p>
     <select id="qty">
       <option value="1">1 boleto</option>
       <option value="2">2 boletos</option>
@@ -56,15 +56,20 @@
       <option value="4">4 boletos</option>
     </select>
 
-    <br>
-
+    <br><br>
     <button onclick="comprar()">Comprar</button>
   </div>
 
   <script>
     function comprar() {
       const qty = document.getElementById("qty").value;
-      const url = "https://script.google.com/macros/s/AKfycbzUFsNmeJupbrr-HMXsRQAcvysMc28JzUZvRmvZVWatGLzGrucWMX-Wu_X5QiMFahde/exec?qty=" + qty;
+      const tipo = document.getElementById("tipo").value;
+
+      const url =
+        "TU_WEB_APP_URL/exec" +
+        "?qty=" + qty +
+        "&tipo=" + encodeURIComponent(tipo);
+
       window.location.href = url;
     }
   </script>
