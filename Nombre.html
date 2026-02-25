@@ -1,81 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Nombres de boletos</title>
-
-  <style>
-    body {
-      font-family: Arial;
-      background:#111;
-      color:#fff;
-      text-align:center;
-      padding:30px;
-    }
-    input {
-      display:block;
-      margin:10px auto;
-      padding:12px;
-      width:80%;
-      max-width:400px;
-      font-size:16px;
-    }
-    button {
-      padding:15px 30px;
-      background:red;
-      color:white;
-      border:none;
-      border-radius:5px;
-      font-size:18px;
-      cursor:pointer;
-      margin-top:20px;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Nombres boletos</title>
+<style>
+body{background:#111;color:#fff;text-align:center;font-family:Arial}
+input{display:block;margin:10px auto;padding:12px;width:80%}
+button{padding:15px 30px;background:red;color:#fff;border:none;font-size:18px}
+</style>
 </head>
 
 <body>
 
 <h2>Ingresá el nombre de cada boleto</h2>
-
 <div id="form"></div>
-
 <button onclick="guardar()">Guardar nombres</button>
 
 <script>
-const params = new URLSearchParams(window.location.search);
-const qty = Number(params.get("qty"));
-const paymentId = params.get("payment_id");
-
-if (!qty || !paymentId) {
-  document.body.innerHTML = "<h2>Error: faltan datos</h2>";
-}
+const p = new URLSearchParams(window.location.search);
+const qty = Number(p.get("qty"));
+const paymentId = p.get("payment_id");
 
 const form = document.getElementById("form");
 
-for (let i = 1; i <= qty; i++) {
-  const input = document.createElement("input");
-  input.placeholder = "Nombre del boleto " + i;
+for(let i=1;i<=qty;i++){
+  let input=document.createElement("input");
+  input.placeholder="Nombre boleto "+i;
   form.appendChild(input);
 }
 
-function guardar() {
-  const inputs = document.querySelectorAll("input");
-  const nombres = Array.from(inputs).map(i => i.value.trim());
-
-  if (nombres.some(n => n === "")) {
-    alert("Completá todos los nombres");
-    return;
-  }
-
-  const nombresParam = encodeURIComponent(nombres.join("|"));
+function guardar(){
+  const nombres=[...document.querySelectorAll("input")].map(i=>i.value.trim());
+  if(nombres.some(n=>!n)) return alert("Completa todos");
 
   const url =
     "https://script.google.com/macros/s/AKfycbx5q1EozgrbM9kOX-veTyoeRjxWA26U223iVvsOw_lcaghTkYVcLz2rJwsBHQFeR8fn/exec" +
     "?action=guardar" +
     "&payment_id=" + paymentId +
-    "&nombres=" + nombresParam;
+    "&nombres=" + encodeURIComponent(JSON.stringify(nombres));
 
-  // ✅ REDIRECCIÓN (NO CORS)
   window.location.href = url;
 }
 </script>
