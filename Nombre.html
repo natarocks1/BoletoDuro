@@ -1,46 +1,65 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Nombres boletos</title>
-<style>
-body{background:#111;color:#fff;text-align:center;font-family:Arial}
-input{display:block;margin:10px auto;padding:12px;width:80%}
-button{padding:15px 30px;background:red;color:#fff;border:none;font-size:18px}
-</style>
+  <meta charset="UTF-8">
+  <title>Nombres de boletos</title>
+
+  <style>
+    body {
+      background:#111;
+      color:#fff;
+      font-family: Arial;
+      text-align:center;
+      padding:30px;
+    }
+    input {
+      display:block;
+      margin:10px auto;
+      padding:12px;
+      width:80%;
+      max-width:400px;
+      font-size:16px;
+    }
+    button {
+      margin-top:20px;
+      padding:15px 30px;
+      background:red;
+      color:white;
+      border:none;
+      border-radius:5px;
+      font-size:18px;
+    }
+  </style>
 </head>
 
 <body>
 
 <h2>Ingresá el nombre de cada boleto</h2>
-<div id="form"></div>
-<button onclick="guardar()">Guardar nombres</button>
+
+<form id="form" method="GET"
+ action="https://script.google.com/macros/s/AKfycbx1-r-I-t95I7_qCKM912ayZwkAVp25ymr8GEQwojUyy4xbOps75mUppxKxFv-ri1C_/exec">
 
 <script>
-const p = new URLSearchParams(window.location.search);
-const qty = Number(p.get("qty"));
-const paymentId = p.get("payment_id");
+  const params = new URLSearchParams(window.location.search);
+  const qty = Number(params.get("qty"));
+  const paymentId = params.get("payment_id");
 
-const form = document.getElementById("form");
+  document.write(`<input type="hidden" name="action" value="guardar">`);
+  document.write(`<input type="hidden" name="qty" value="${qty}">`);
+  document.write(`<input type="hidden" name="payment_id" value="${paymentId}">`);
 
-for(let i=1;i<=qty;i++){
-  let input=document.createElement("input");
-  input.placeholder="Nombre boleto "+i;
-  form.appendChild(input);
-}
+  for (let i = 1; i <= qty; i++) {
+    document.write(
+      `<input name="nombre_${i}" placeholder="Nombre boleto ${i}" required>`
+    );
+  }
+</script>
 
-function guardar(){
-  const nombres=[...document.querySelectorAll("input")].map(i=>i.value.trim());
-  if(nombres.some(n=>!n)) return alert("Completa todos");
+<button type="submit">Guardar nombres</button>
+</form>
 
-  const url =
-    "https://script.google.com/macros/s/AKfycbx5q1EozgrbM9kOX-veTyoeRjxWA26U223iVvsOw_lcaghTkYVcLz2rJwsBHQFeR8fn/exec" +
-    "?action=guardar" +
-    "&payment_id=" + paymentId +
-    "&nombres=" + encodeURIComponent(JSON.stringify(nombres));
-
-  window.location.href = url;
-}
+</body>
+</html>
 </script>
 
 </body>
