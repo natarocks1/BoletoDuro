@@ -1,25 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+  <meta charset="UTF-8">
   <title>NATA EN VIVO</title>
+
   <style>
     body {
       font-family: Arial;
       text-align: center;
       background: #111;
       color: #fff;
+      padding: 20px;
     }
     img {
       max-width: 90%;
       margin: 20px 0;
     }
-    .box {
-      margin-top: 30px;
-    }
     select, button {
       padding: 12px;
       font-size: 16px;
       margin-top: 10px;
+      width: 260px;
     }
     button {
       background: red;
@@ -28,7 +29,6 @@
       border-radius: 5px;
       cursor: pointer;
     }
-    button:hover { opacity: 0.9; }
   </style>
 </head>
 
@@ -39,37 +39,36 @@
 
   <img src="images/fLYER 907.fw.png" alt="Banner del show">
 
-  <div class="box">
-    <h2>Compra tus boletos</h2>
+  <h2>Compra tus boletos</h2>
 
-    <p>Tipo de boleto</p>
-    <select id="tipo">
-      <option value="General: $250">General: $250</option>
-      <option value="Meet & Greet: $500">Meet & Greet: $500</option>
-    </select>
+  <p>Tipo de boleto</p>
+  <select id="tipo">
+    <option value="general">General - $250</option>
+    <option value="meet">Meet & Greet - $500</option>
+  </select>
 
-    <p>Cantidad</p>
-    <select id="qty">
-      <option value="1">1 boleto</option>
-      <option value="2">2 boletos</option>
-      <option value="3">3 boletos</option>
-      <option value="4">4 boletos</option>
-      <option value="5">5 boletos</option>
-    </select>
+  <p>Cantidad</p>
+  <select id="qty">
+    <option value="1">1 boleto</option>
+    <option value="2">2 boletos</option>
+    <option value="3">3 boletos</option>
+    <option value="4">4 boletos</option>
+    <option value="5">5 boletos</option>
+  </select>
 
-    <br><br>
-    <button onclick="comprar()">Comprar</button>
-  </div>
+  <br><br>
+  <button onclick="comprar()">Comprar</button>
 
   <script>
     function comprar() {
       const qty = document.getElementById("qty").value;
       const tipo = document.getElementById("tipo").value;
 
+      // 🔴 URL DE TU MERCAP.GS (doGet)
       const url =
-        "https://script.google.com/macros/s/AKfycbzUFsNmeJupbrr-HMXsRQAcvysMc28JzUZvRmvZVWatGLzGrucWMX-Wu_X5QiMFahde/exec" +
+        "https://script.google.com/macros/s/AKfycbw3UlGx3JjsbfiN7JzybUKsVhUjd8MRUtF8XYcE7eOgtH6AHSknU6lBXhFUN0DxDE0o/exec" +
         "?qty=" + qty +
-        "&tipo=" + encodeURIComponent(tipo);
+        "&tipo=" + tipo;
 
       window.location.href = url;
     }
