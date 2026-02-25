@@ -68,7 +68,7 @@
       const url =
         "https://script.google.com/macros/s/AKfycbwCkEzK9Ity-3JoOZjhckTaXl7cOb6rGKaFPMlzubhHHG_QoboFMv5uijbeh3x8FPO4/exec" +
         "?qty=" + qty +
-        "&tipo=" + tipo;
+        "&tipo=" + encodeURIComponent(tipo);
 
       window.location.href = url;
     }
