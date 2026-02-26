@@ -6,7 +6,7 @@
 
   <style>
     body {
-      font-family: Arial;
+      font-family: Arial, sans-serif;
       text-align: center;
       background: #111;
       color: #fff;
@@ -15,12 +15,16 @@
     img {
       max-width: 90%;
       margin: 20px 0;
+      border-radius: 10px;
     }
     select, button {
       padding: 12px;
       font-size: 16px;
       margin-top: 10px;
       width: 260px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
     button {
       background: red;
@@ -28,6 +32,12 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    button:disabled {
+      background: #555;
+      cursor: not-allowed;
     }
   </style>
 </head>
@@ -57,27 +67,10 @@
   </select>
 
   <br><br>
-  <button onclick="comprar()">Comprar</button>
+  <button id="btnComprar" onclick="comprar()">Comprar</button>
 
 <script>
-async function comprar() {
-  console.log("comprando...");
-
+function comprar() {
+  const btn = document.getElementById("btnComprar");
   const qty = document.getElementById("qty").value;
-  const tipo = document.getElementById("tipo").value;
-
-  const url = "https://script.google.com/macros/s/AKfycbzY6o5c71bsdZxzintWqmYTusyfllUQy0Z5ShhibGQViEWvfbHeN615YmquDFkN6uoT/exec"
-    + "?qty=" + qty
-    + "&tipo=" + encodeURIComponent(tipo);
-
-  const res = await fetch(url);
-  const mpUrl = await res.text();
-
-  console.log("MP URL:", mpUrl);
-
-  window.location.href = mpUrl;
-}
-</script>
-
-</body>
-</html>
+  const
