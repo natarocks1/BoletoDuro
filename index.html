@@ -17,7 +17,7 @@
       margin: 20px 0;
       border-radius: 10px;
     }
-    select, button {
+    select {
       padding: 12px;
       font-size: 16px;
       margin-top: 10px;
@@ -25,8 +25,17 @@
       display: block;
       margin-left: auto;
       margin-right: auto;
+      background: #222;
+      color: white;
+      border: 1px solid #444;
     }
-    button {
+    /* Estilo para que el enlace parezca un botón */
+    .boton-compra {
+      display: inline-block;
+      padding: 15px;
+      font-size: 18px;
+      margin-top: 25px;
+      width: 230px;
       background: red;
       color: white;
       border: none;
@@ -34,10 +43,10 @@
       cursor: pointer;
       font-weight: bold;
       text-transform: uppercase;
+      text-decoration: none;
     }
-    button:disabled {
-      background: #555;
-      cursor: not-allowed;
+    .boton-compra:hover {
+      background: #cc0000;
     }
   </style>
 </head>
@@ -66,11 +75,31 @@
     <option value="5">5 boletos</option>
   </select>
 
-  <br><br>
-  <button id="btnComprar" onclick="comprar()">Comprar</button>
+  <br>
+  <a href="#" id="linkPago" class="boton-compra" onclick="generarEnlace(event)">Comprar Ahora</a>
 
 <script>
-function comprar() {
-  const btn = document.getElementById("btnComprar");
+function generarEnlace(event) {
+  // Evitamos que el enlace haga algo antes de tiempo
+  event.preventDefault();
+  
+  const btn = document.getElementById("linkPago");
   const qty = document.getElementById("qty").value;
-  const
+  const tipo = document.getElementById("tipo").value;
+
+  btn.innerText = "CARGANDO...";
+  btn.style.background = "#555";
+
+  // URL de tu Apps Script
+  const scriptURL = "https://script.google.com/macros/s/AKfycbzY6o5c71bsdZxzintWqmYTusyfllUQy0Z5ShhibGQViEWvfbHeN615YmquDFkN6uoT/exec";
+  
+  // Construimos la URL con los datos
+  const finalUrl = scriptURL + "?qty=" + qty + "&tipo=" + encodeURIComponent(tipo);
+
+  // Redirigimos directamente
+  window.location.href = finalUrl;
+}
+</script>
+
+</body>
+</html>
