@@ -29,7 +29,6 @@
       color: white;
       border: 1px solid #444;
     }
-    /* Estilo para que el enlace parezca un botón */
     .boton-compra {
       display: inline-block;
       padding: 15px;
@@ -80,7 +79,6 @@
 
 <script>
 function generarEnlace(event) {
-  // Evitamos que el enlace haga algo antes de tiempo
   event.preventDefault();
   
   const btn = document.getElementById("linkPago");
@@ -90,13 +88,12 @@ function generarEnlace(event) {
   btn.innerText = "CARGANDO...";
   btn.style.background = "#555";
 
-  // URL de tu Apps Script
-  const scriptURL = "https://script.google.com/macros/s/AKfycbzY6o5c71bsdZxzintWqmYTusyfllUQy0Z5ShhibGQViEWvfbHeN615YmquDFkN6uoT/exec";
+  // TU URL REAL ACTUALIZADA
+  const scriptURL = "https://script.google.com/macros/s/AKfycbyoZwA0mfJbowtPXMsBCM-Uq9xUuJ12WcmKZJDPkKKscTvUmrx4BSgBOkU2KEP0NVDa/exec";
   
-  // Construimos la URL con los datos
   const finalUrl = scriptURL + "?qty=" + qty + "&tipo=" + encodeURIComponent(tipo);
 
-  // Redirigimos directamente
+  // Redirección al script de Google
   window.location.href = finalUrl;
 }
 </script>
