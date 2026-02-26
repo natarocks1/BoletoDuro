@@ -3,53 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>NATA EN VIVO</title>
-
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background: #111;
-      color: #fff;
-      padding: 20px;
-    }
-    img {
-      max-width: 90%;
-      margin: 20px 0;
-      border-radius: 10px;
-    }
-    select {
-      padding: 12px;
-      font-size: 16px;
-      margin-top: 10px;
-      width: 260px;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      background: #222;
-      color: white;
-      border: 1px solid #444;
-    }
-    .boton-compra {
-      display: inline-block;
-      padding: 15px;
-      font-size: 18px;
-      margin-top: 25px;
-      width: 230px;
-      background: red;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-      text-transform: uppercase;
-      text-decoration: none;
-    }
-    .boton-compra:hover {
-      background: #cc0000;
-    }
+    body { font-family: Arial, sans-serif; text-align: center; background: #111; color: #fff; padding: 20px; }
+    img { max-width: 90%; margin: 20px 0; border-radius: 10px; }
+    select { padding: 12px; font-size: 16px; margin-top: 10px; width: 260px; display: block; margin-left: auto; margin-right: auto; background: #222; color: white; border: 1px solid #444; }
+    .boton-compra { display: inline-block; padding: 15px; font-size: 18px; margin-top: 25px; width: 230px; background: red; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; text-transform: uppercase; text-decoration: none; }
+    .boton-compra:hover { background: #cc0000; }
   </style>
 </head>
-
 <body>
 
   <h1>NATA EN VIVO</h1>
@@ -80,23 +41,23 @@
 <script>
 function generarEnlace(event) {
   event.preventDefault();
-  
   const btn = document.getElementById("linkPago");
   const qty = document.getElementById("qty").value;
   const tipo = document.getElementById("tipo").value;
 
-  btn.innerText = "CARGANDO...";
+  btn.innerText = "REDIRECCIONANDO...";
   btn.style.background = "#555";
 
-  // TU URL REAL ACTUALIZADA
-  const scriptURL = "https://script.google.com/macros/s/AKfycbxbjuLygge8PUQUJoRSd_mQce8Bu3qUlPOuQ0FmQfBzDVSj-1uCiv88KGRHxHBPx1ZS/exec";
+  // COLOQUÉ AQUÍ LA URL QUE TE DIO EL MENSAJE "EL SCRIPT NUEVO ESTA VIVO"
+  const scriptURL = "https://script.google.com/macros/s/AKfycby3N5R-qHDs6QxsAK9lV7eCT1NQJiKVaLEUo42oiJETJyrl3_-FbRW8bKTgSrrntkJj/exec";
   
+  // Enviamos los datos reales
   const finalUrl = scriptURL + "?qty=" + qty + "&tipo=" + encodeURIComponent(tipo);
 
-  // Redirección al script de Google
   window.location.href = finalUrl;
 }
 </script>
-
+</body>
+</html>
 </body>
 </html>
