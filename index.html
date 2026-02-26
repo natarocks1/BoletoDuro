@@ -62,16 +62,18 @@
   <script>
     function comprar() {
       const qty = document.getElementById("qty").value;
-      const tipo = document.getElementById("tipo").value;
+  const tipo = document.getElementById("tipo").value;
 
-      // 🔴 URL DE TU MERCAP.GS (doGet)
-      const url =
-        "https://script.google.com/macros/s/AKfycbzY6o5c71bsdZxzintWqmYTusyfllUQy0Z5ShhibGQViEWvfbHeN615YmquDFkN6uoT/exec" +
-        "?qty=" + qty +
-        "&tipo=" + encodeURIComponent(tipo);
+  const res = await fetch(
+    "https://script.google.com/macros/s/AKfycbyoZwA0mfJbowtPXMsBCM-Uq9xUuJ12WcmKZJDPkKKscTvUmrx4BSgBOkU2KEP0NVDa/exec" +
+    "?qty=" + qty +
+    "&tipo=" + encodeURIComponent(tipo)
+  );
 
-      window.location.href = url;
-    }
+  const mpUrl = await res.text();
+
+  window.location.href = mpUrl;
+}
   </script>
 
 </body>
