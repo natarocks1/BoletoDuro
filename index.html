@@ -59,22 +59,25 @@
   <br><br>
   <button onclick="comprar()">Comprar</button>
 
-  <script>
-    function comprar() {
-      const qty = document.getElementById("qty").value;
+<script>
+async function comprar() {
+  console.log("comprando...");
+
+  const qty = document.getElementById("qty").value;
   const tipo = document.getElementById("tipo").value;
 
-  const res = await fetch(
-    "https://script.google.com/macros/s/AKfycbyoZwA0mfJbowtPXMsBCM-Uq9xUuJ12WcmKZJDPkKKscTvUmrx4BSgBOkU2KEP0NVDa/exec" +
-    "?qty=" + qty +
-    "&tipo=" + encodeURIComponent(tipo)
-  );
+  const url = "https://script.google.com/macros/s/AKfycbzY6o5c71bsdZxzintWqmYTusyfllUQy0Z5ShhibGQViEWvfbHeN615YmquDFkN6uoT/exec"
+    + "?qty=" + qty
+    + "&tipo=" + encodeURIComponent(tipo);
 
+  const res = await fetch(url);
   const mpUrl = await res.text();
+
+  console.log("MP URL:", mpUrl);
 
   window.location.href = mpUrl;
 }
-  </script>
+</script>
 
 </body>
 </html>
